@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    --background: 222 47% 4%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 6%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 6%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 276 100% 75%;
+    --primary-foreground: 222 47% 4%;
+
+    --secondary: 215 28% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 215 28% 17%;
+    --muted-foreground: 217 20% 65%;
+
+    --accent: 180 100% 50%;
+    --accent-foreground: 222 47% 4%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 276 100% 75%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 222 47% 4%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 276 100% 75%;
+    --sidebar-primary-foreground: 222 47% 4%;
+    --sidebar-accent: 215 28% 17%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 215 28% 17%;
+    --sidebar-ring: 276 100% 75%;
+
+    /* Quantum Theme Colors */
+    --quantum-50: 276 100% 95%;
+    --quantum-100: 276 100% 90%;
+    --quantum-200: 276 100% 85%;
+    --quantum-300: 276 100% 80%;
+    --quantum-400: 276 100% 75%;
+    --quantum-500: 276 100% 70%;
+    --quantum-600: 276 80% 60%;
+    --quantum-700: 276 60% 50%;
+    --quantum-800: 276 40% 40%;
+    --quantum-900: 276 30% 25%;
+    --quantum-950: 276 20% 15%;
+
+    /* Neural AI Theme Colors */
+    --neural-50: 180 100% 95%;
+    --neural-100: 180 100% 90%;
+    --neural-200: 180 100% 85%;
+    --neural-300: 180 100% 75%;
+    --neural-400: 180 100% 65%;
+    --neural-500: 180 100% 50%;
+    --neural-600: 180 80% 45%;
+    --neural-700: 180 60% 35%;
+    --neural-800: 180 40% 25%;
+    --neural-900: 180 30% 15%;
+    --neural-950: 180 20% 10%;
+
+    /* Algorand Theme Colors */
+    --algorand-50: 160 100% 95%;
+    --algorand-100: 160 100% 90%;
+    --algorand-200: 160 100% 85%;
+    --algorand-300: 160 100% 75%;
+    --algorand-400: 160 100% 65%;
+    --algorand-500: 160 100% 45%;
+    --algorand-600: 160 80% 40%;
+    --algorand-700: 160 60% 30%;
+    --algorand-800: 160 40% 20%;
+    --algorand-900: 160 30% 15%;
+    --algorand-950: 160 20% 10%;
+  }
+
+  .dark {
+    --background: 222 47% 2%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 4%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 4%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 276 100% 80%;
+    --primary-foreground: 222 47% 2%;
+
+    --secondary: 215 28% 12%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 215 28% 12%;
+    --muted-foreground: 217 20% 65%;
+
+    --accent: 180 100% 60%;
+    --accent-foreground: 222 47% 2%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 28% 12%;
+    --input: 215 28% 12%;
+    --ring: 276 100% 80%;
+    --sidebar-background: 222 47% 2%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 276 100% 80%;
+    --sidebar-primary-foreground: 222 47% 2%;
+    --sidebar-accent: 215 28% 12%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 215 28% 12%;
+    --sidebar-ring: 276 100% 80%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
