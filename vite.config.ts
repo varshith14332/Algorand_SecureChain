@@ -1,9 +1,7 @@
-import express from "express";
 import { defineConfig, Plugin } from "vite";
-
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-
+import express from "express";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -23,6 +21,18 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./client"),
       "@shared": path.resolve(__dirname, "./shared"),
+    },
+  },
+  define: {
+    global: 'globalThis',
+    'process.env': {},
+  },
+  optimizeDeps: {
+    include: ['algosdk', '@perawallet/connect'],
+    esbuildOptions: {
+      define: {
+        global: 'globalThis',
+      },
     },
   },
 }));

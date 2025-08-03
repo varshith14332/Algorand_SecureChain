@@ -5,8 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QuantumGuard - Quantum-Resistant Algorand Wallet</title>
 
-    <!-- PeraWalletConnect SDK -->
-    <script src="https://unpkg.com/@perawallet/connect@1.3.1/dist/index.umd.js"></script>
+    <!-- Polyfills for Node.js compatibility -->
+    <script>
+      if (typeof global === 'undefined') {
+        var global = globalThis || window;
+      }
+      if (typeof process === 'undefined') {
+        var process = { env: {} };
+      }
+      if (typeof Buffer === 'undefined') {
+        var Buffer = { isBuffer: () => false };
+      }
+    </script>
   </head>
 
   <body>
