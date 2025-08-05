@@ -9,14 +9,7 @@ const algodPort = 443;
 export const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort);
 
 // Initialize PeraWallet with safe window check
-export const peraWallet = new PeraWalletConnect({
-  metadata: {
-    name: 'QuantumGuard Wallet',
-    description: 'Quantum-Resistant Algorand Wallet with AI Guardian',
-    url: typeof window !== 'undefined' ? window.location.origin : 'https://quantumguard.app',
-    icons: [typeof window !== 'undefined' ? `${window.location.origin}/favicon.ico` : '/favicon.ico']
-  }
-});
+export const peraWallet = new PeraWalletConnect();
 
 // Utility functions for Algorand operations
 export const algorandUtils = {
@@ -26,8 +19,8 @@ export const algorandUtils = {
       const accountInfo = await algodClient.accountInformation(address).do();
       return {
         address: accountInfo.address,
-        balance: accountInfo.amount / 1000000, // Convert microAlgos to Algos
-        minBalance: accountInfo['min-balance'] / 1000000,
+        balance: Number(accountInfo.amount) / 1000000, // Convert microAlgos to Algos
+        minBalance: Number(accountInfo['min-balance']) / 1000000,
         assets: accountInfo.assets || [],
         round: accountInfo.round
       };
@@ -52,24 +45,23 @@ export const algorandUtils = {
     try {
       const suggestedParams = await this.getSuggestedParams();
       
-      const txn = algosdk.makePaymentTxnWithSuggestedParams(
-        from,
-        to,
-        amount * 1000000, // Convert Algos to microAlgos
-        undefined,
-        note ? new TextEncoder().encode(note) : undefined,
+      const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
+        sender: from,
+        receiver: to,
+        amount: Math.round(amount * 1000000), // Convert Algos to microAlgos
+        note: note ? new TextEncoder().encode(note) : undefined,
         suggestedParams
-      );
+      });
 
-      // Sign with PeraWallet
-      const signedTxns = await peraWallet.signTransaction([
+      // Sign with PeraWallet - PeraWallet expects SignerTransaction[][] format
+      const signedTxns = await peraWallet.signTransaction([[
         { txn: txn, signers: [from] }
-      ]);
+      ]]);
 
       // Submit transaction
-      const { txId } = await algodClient.sendRawTransaction(signedTxns).do();
-      
-      return txId;
+      const response = await algodClient.sendRawTransaction(signedTxns).do();
+
+      return response.txid || txn.txID();
     } catch (error) {
       console.error('Error sending payment:', error);
       throw error;
