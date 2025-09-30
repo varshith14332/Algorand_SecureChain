@@ -27,6 +27,10 @@ const navigationItems = [
   { name: 'Developer', href: '/developer', icon: Code },
   { name: 'Security', href: '/security', icon: Lock },
   { name: 'Alerts', href: '/alerts', icon: Bell },
+  { name: 'Logs', href: '/logs', icon: Eye },
+  { name: 'Dashboard', href: '/performance', icon: Activity },
+  { name: 'Community', href: '/community', icon: GitBranch },
+  { name: 'Forum', href: '/forum', icon: Terminal },
 ];
 
 export function Navigation() {
